@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+  schoolapapigaway:
+    container_name: api_get_away
+    image: phoenixdd/schoolapapigaway:latest
+    ports:
+      - "5010:80"
+  gescservice:
+    container_name: configuration_de_lecole
+    image: phoenixdd/gescservice:latest
+    ports:
+      - "5020:80"
+    depends_on:
+      - rabbitmq
+      - schoolapapigaway
+      
